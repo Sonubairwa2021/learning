@@ -21,4 +21,20 @@ class Product extends Model
         'thmnal',
         'status',
     ];
+
+     // Local Scope to get only active products
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
+
+      // Local Scope to get expensive products
+    public function scopeExpensive($query, $minPrice)
+    {
+        return $query->where('price', '>=', $minPrice);
+    }
+    public function scopePriceBetween($query, $minPrice, $maxPrice)
+{
+    return $query->whereBetween('price', [$minPrice, $maxPrice]);
+}
 }
