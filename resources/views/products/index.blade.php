@@ -17,9 +17,10 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Thumbnail</th>
+                {{-- <th>Thumbnail</th> --}}
                 <th>Price</th>
                 <th>Stock</th>
+               
                 <th>SKU</th>
                 <th>Status</th>
             </tr>
@@ -29,22 +30,21 @@
                 <tr>
                     <td>{{ $product->id }}</td>
                     <td>{{ $product->name }}</td>
-                    <td>
+                    {{-- <td>
                         @if($product->thmnal)
                             <img src="{{ $product->thmnal }}" alt="thumbnail" class="img-thumbnail" width="80">
                         @else
                             <span class="text-muted">No Image</span>
                         @endif
+                    </td> --}}
+                    <td>{{ Helper::addCurrency($product->price) }}</td>
+                   
+                    <td>
+                        {!! Helper::getOutofStockLabel($product->stock) !!}
                     </td>
-                    <td>₹{{ number_format($product->price, 2) }}</td>
-                    <td>{{ $product->stock }}</td>
                     <td>{{ $product->sku }}</td>
                     <td>
-                        @if($product->status)
-                            <span class="badge bg-success">Active</span>
-                        @else
-                            <span class="badge bg-danger">Inactive</span>
-                        @endif
+                        {!! Helper::getStatusLabel($product->status) !!}
                     </td>
                 </tr>
             @empty
